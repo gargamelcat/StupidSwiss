@@ -14,10 +14,10 @@
             <h3>Enter Amount !</h3>
             <p>
                 <h:outputLabel for="searchedAcct" value="Amount: "/>
-                <h:inputText id="searchedAcct" value="#{convManager.originValue}"/> 
+                <h:inputText id="searchedAcct" value="#{convManager.setOriginValue}"/> 
                 <h:outputLabel for="currencyOrigin" value=" from: "/> 
                 <h:selectOneMenu id="currency1" 
-                     value="#{convManager.currency1}">
+                     value="#{convManager.setCurrency1}">
                      <f:selectItem id="item1" itemLabel="Euro" itemValue="Euro1" />
                      <f:selectItem id="item2" itemLabel="Dollar" itemValue="Dollar1" />
                      <f:selectItem id="item3" itemLabel="Swedish Krona" itemValue="SEK1" />
@@ -25,7 +25,7 @@
                  </h:selectOneMenu>
                 <h:outputLabel for="currencyDestination" value=" to: "/>
                 <h:selectOneMenu id="currency2" 
-                     value="#{convManager.currency2}">
+                     value="#{convManager.setCurrency2}">
                      <f:selectItem id="item5" itemLabel="Euro" itemValue="Euro2" />
                      <f:selectItem id="item6" itemLabel="Dollar" itemValue="Dollar2" />
                      <f:selectItem id="item7" itemLabel="Swedish Krona" itemValue="SEK2" />
