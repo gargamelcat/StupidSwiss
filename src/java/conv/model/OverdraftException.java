@@ -1,4 +1,4 @@
-package bank.model;
+package conv.model;
 
 /**
  * Thrown when withdrawal would result in a negative balance.

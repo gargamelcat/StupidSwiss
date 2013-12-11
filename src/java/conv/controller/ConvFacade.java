@@ -1,8 +1,8 @@
-package bank.controller;
+package conv.controller;
 
-import bank.model.Account;
-import bank.model.AccountDTO;
-import bank.model.OverdraftException;
+import conv.model.ConversionRate;
+import conv.model.ConversionRateDTO;
+import conv.model.OverdraftException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
-public class CashierFacade {
+public class ConvFacade {
     @PersistenceContext(unitName = "ConvPU")
     private EntityManager em;
 
@@ -27,8 +27,8 @@ public class CashierFacade {
      * @param lastName Holder's last name.
      * @param balance Initial balance.
      */
-    public AccountDTO createAccount(String firstName, String lastName, int balance) {
-        Account newAcct = new Account(balance, firstName, lastName);
+    public ConversionRateDTO createAccount(String firstName, String lastName, int balance) {
+        ConversionRate newAcct = new ConversionRate(balance, firstName, lastName);
         em.persist(newAcct);
         return newAcct;
     }
@@ -40,8 +40,8 @@ public class CashierFacade {
      * @return The account if it was found.
      * @throws EntityNotFoundException If the account was not found.
      */
-    public AccountDTO findAccount(int acctNo) {
-        AccountDTO found =  em.find(Account.class, acctNo);
+    public ConversionRateDTO findAccount(int acctNo) {
+        ConversionRateDTO found =  em.find(ConversionRate.class, acctNo);
         if (found == null) {
             throw new EntityNotFoundException("No account with number " + acctNo);
         }
@@ -55,7 +55,7 @@ public class CashierFacade {
      * @throws OverdraftException If withdrawal would result in a negative balance.
      */
     public void withdraw(int acctNo, int amount) throws OverdraftException {
-        Account acct = em.find(Account.class, acctNo);
+        ConversionRate acct = em.find(ConversionRate.class, acctNo);
         acct.withdraw(amount);
     }
 
@@ -65,7 +65,7 @@ public class CashierFacade {
      * @param amount        The amount to deposit.
      */
     public void deposit(int acctNo, int amount) {
-        Account acct = em.find(Account.class, acctNo);
+        ConversionRate acct = em.find(ConversionRate.class, acctNo);
         acct.deposit(amount);
     }
 

@@ -1,9 +1,9 @@
-package bank.model;
+package conv.model;
 
 /**
  * The views read-only view of an Account.
  */
-public interface AccountDTO {
+public interface ConversionRateDTO {
     /**                                     
      * Gets the number of this Account.
      *

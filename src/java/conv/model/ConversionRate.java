@@ -1,4 +1,4 @@
-package bank.model;
+package conv.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * A persistent representation of an account.
  */
 @Entity
-public class Account implements AccountDTO, Serializable {
+public class ConversionRate implements ConversionRateDTO, Serializable {
 
     private static final long serialVersionUID = 16247164401L;
     @Id
@@ -23,13 +23,13 @@ public class Account implements AccountDTO, Serializable {
     /**
      * Creates a new instance of Account
      */
-    public Account() {
+    public ConversionRate() {
     }
 
     /**
      * Creates a new instance of Account
      */
-    public Account(int balance, String firstName, String lastName) {
+    public ConversionRate(int balance, String firstName, String lastName) {
         this.balance = balance;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -105,10 +105,10 @@ public class Account implements AccountDTO, Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Account)) {
+        if (!(object instanceof ConversionRate)) {
             return false;
         }
-        Account other = (Account) object;
+        ConversionRate other = (ConversionRate) object;
         return this.acctNo == other.acctNo;
     }
 

@@ -1,7 +1,7 @@
-package bank.view;
+package conv.view;
 
-import bank.controller.CashierFacade;
-import bank.model.AccountDTO;
+import conv.controller.ConvFacade;
+import conv.model.ConversionRateDTO;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
@@ -11,12 +11,12 @@ import javax.inject.Named;
 
 @Named("acctManager")
 @ConversationScoped
-public class AcctManager implements Serializable {
+public class ConvManager implements Serializable {
 
     private static final long serialVersionUID = 16247164405L;
     @EJB
-    private CashierFacade cashierFacade;
-    private AccountDTO currentAcct;
+    private ConvFacade cashierFacade;
+    private ConversionRateDTO currentAcct;
     private String newAccountHolderFirstName;
     private String newAccountHolderLastName;
     private Integer newAccountBalance;
@@ -229,7 +229,7 @@ public class AcctManager implements Serializable {
      *
      * @return the value of currentAcct
      */
-    public AccountDTO getCurrentAcct() {
+    public ConversionRateDTO getCurrentAcct() {
         return currentAcct;
     }
 }
