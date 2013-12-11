@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Welcome to the Currency Converter</title>
+    </h:head>
+    <h:body>
+        <h1>Welcome to the awesome currency converter!</h1>
+
+        <hr/> 
+        <h:form>
+            <h3>Enter Amount !</h3>
+            <p>
+                <h:outputLabel for="searchedAcct" value="Amount: "/>
+                <h:inputText id="searchedAcct" value="#{acctManager.searchedAcct}"/> 
+                <h:outputLabel for="currencyOrigin" value=" from: "/> 
+                <h:selectOneMenu id="currency1" 
+                     value="#{currencyController.currency1}">
+                     <f:selectItem id="item1" itemLabel="Euro" itemValue="Euro1" />
+                     <f:selectItem id="item2" itemLabel="Dollar" itemValue="Dollar1" />
+                     <f:selectItem id="item3" itemLabel="Swedish Krona" itemValue="SEK1" />
+                     <f:selectItem id="item4" itemLabel="Swiss FranC" itemValue="CHF1" />
+                 </h:selectOneMenu>
+                <h:outputLabel for="currencyDestination" value=" to: "/>
+                <h:selectOneMenu id="currency2" 
+                     value="#{currencyController.currency2}">
+                     <f:selectItem id="item5" itemLabel="Euro" itemValue="Euro2" />
+                     <f:selectItem id="item6" itemLabel="Dollar" itemValue="Dollar2" />
+                     <f:selectItem id="item7" itemLabel="Swedish Krona" itemValue="SEK2" />
+                     <f:selectItem id="item8" itemLabel="Swiss FranC" itemValue="CHF2" />
+                </h:selectOneMenu>
+              </p>  
+                                <h:outputText value="CONVERTED AMOUNT" />
+
+            
+            <p>
+                <h:commandButton value="Convert" action="#{currencyController.convert}"/>
+            </p>
+
+        </h:form>
+
+    </h:body>
+</html>
