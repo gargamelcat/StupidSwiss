@@ -40,7 +40,7 @@ public class ConvManager implements Serializable {
     }
 
     private void readConversionRate() {
-        return currentConversionRate.getRate();
+        //todo
         
     }
 
@@ -78,6 +78,7 @@ public class ConvManager implements Serializable {
      * <code>currentAcct.getAcctNo()</code>.
      */
     public int convert() {
-        convFacade.convert(currentConversionRate.getOriginCurrency(), currentConversionRate.getResultCurrency());
+        convFacade.convert(10,currentConversionRate.getOriginCurrency(), currentConversionRate.getResultCurrency());
+        return 10;
     }
 }

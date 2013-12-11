@@ -2,7 +2,6 @@ package conv.controller;
 
 import conv.model.ConversionRate;
 import conv.model.ConversionRateDTO;
-import conv.model.OverdraftException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -26,9 +25,9 @@ public class ConvFacade {
      * @param amount        The amount to withdraw.
      * @throws OverdraftException If withdrawal would result in a negative balance.
      */
-    public int convert(String originCurrency, String resultCurrency) throws OverdraftException {
-        ConversionRate acct = em.find(ConversionRate.class, acctNo);
-        acct.withdraw(amount);
+    public int convert(double value, String originCurrency, String resultCurrency) {
+        ConversionRate acct = em.find(ConversionRate.class, originCurrency);
+        return 10;
     }
 
 

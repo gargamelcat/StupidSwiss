@@ -28,8 +28,8 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
     /**
      * Creates a new instance of Account
      */
-    public ConversionRate(int balance, String firstName, String lastName) {
-        this.balance = balance;
+    public ConversionRate(int convRate, String firstName, String lastName) {
+        this.convRate = convRate;
         this.originCurrency = firstName;
         this.resultCurrency = lastName;
     }
