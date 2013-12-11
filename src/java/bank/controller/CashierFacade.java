@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class CashierFacade {
-    @PersistenceContext(unitName = "BankPU")
+    @PersistenceContext(unitName = "ConvPU")
     private EntityManager em;
 
     /**
