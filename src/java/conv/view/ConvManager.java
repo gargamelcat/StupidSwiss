@@ -18,6 +18,8 @@ public class ConvManager implements Serializable {
     private ConvFacade convFacade;
     private ConversionRateDTO currentConversionRate;
     private double originValue;
+    private String currency1;
+    private String currency2;
     private Exception transactionFailure;
     @Inject
     private Conversation conversation;
@@ -79,7 +81,8 @@ public class ConvManager implements Serializable {
      * <code>currentAcct.getAcctNo()</code>.
      */
     public int convert() {
-        convFacade.convert(10,currentConversionRate.getOriginCurrency(), currentConversionRate.getResultCurrency());
+        //convFacade.convert(originValue, currency1, currency2);
+        System.out.println("value: " + originValue + " curency one: " + currency1 + " currency2: " + currency2);
         return 10;
     }
 }
