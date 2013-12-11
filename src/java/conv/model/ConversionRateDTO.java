@@ -9,27 +9,20 @@ public interface ConversionRateDTO {
      *
      * @return the account number.
      */
-    int getAcctNo();
-
-    /**
-     * Gets the balance of this Account.
-     *
-     * @return this accounts balance.
-     */
-    int getBalance();
+    int getRate();
 
     /**
      * Gets the first name of the holder of this Account.
      *
      * @return the first name of the holder of this Account.
      */
-    String getFirstName();
+    String getOriginCurrency();
 
     /**
      * Gets the last name of the holder of this Account.
      *
      * @return the last name of the holder of this Account.
      */
-    String getLastName();
+    String getResultCurrency();
 
 }

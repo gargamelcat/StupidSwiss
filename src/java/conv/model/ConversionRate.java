@@ -15,10 +15,9 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
     private static final long serialVersionUID = 16247164401L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int acctNo;
-    private int balance;
-    private String firstName;
-    private String lastName;
+    private int convRate;
+    private String originCurrency;
+    private String resultCurrency;
 
     /**
      * Creates a new instance of Account
@@ -31,8 +30,8 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
      */
     public ConversionRate(int balance, String firstName, String lastName) {
         this.balance = balance;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.originCurrency = firstName;
+        this.resultCurrency = lastName;
     }
 
     /**
@@ -41,8 +40,8 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
      * @return the value of lastNAme
      */
     @Override
-    public String getLastName() {
-        return lastName;
+    public String getResultCurrency() {
+        return resultCurrency;
     }
 
     /**
@@ -51,8 +50,8 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
      * @return the value of firstName
      */
     @Override
-    public String getFirstName() {
-        return firstName;
+    public String getOriginCurrency() {
+        return originCurrency;
     }
 
     /**
@@ -71,36 +70,14 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
      * @return the value of account number.
      */
     @Override
-    public int getAcctNo() {
-        return acctNo;
-    }
-
-    /**
-     * Withdraws the specified amount.
-     *
-     * @param amount        The amount to withdraw.
-     * @throws OverdraftException If withdrawal would result in a negative balance.
-     */
-    public void withdraw(int amount) throws OverdraftException {
-        if (amount > balance) {
-            throw new OverdraftException("Overdraft attempt, balance: " + balance + ", amount: " + amount);
-        }
-        balance = balance - amount;
-    }
-
-    /**
-     * Deposits the specified amount.
-     *
-     * @param amount        The amount to deposit.
-     */
-    public void deposit(int amount) {
-        balance = balance + amount;
+    public int getRate() {
+        return convRate;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        return new Integer(acctNo).hashCode();
+        return new Integer(convRate).hashCode();
     }
 
     @Override
@@ -109,11 +86,11 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
             return false;
         }
         ConversionRate other = (ConversionRate) object;
-        return this.acctNo == other.acctNo;
+        return this.convRate == other.convRate;
     }
 
     @Override
     public String toString() {
-        return "bank.model.Account[id=" + acctNo + "]";
+        return "conv.model.ConversionRate[id=" + convRate + "]";
     }
 }

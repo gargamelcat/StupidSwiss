@@ -45,7 +45,7 @@ public class ConvManager implements Serializable {
     }
 
     private void readAcctData() {
-        searchedAcct = currentAcct.getAcctNo();
+        searchedAcct = currentAcct.getRate();
         findAccount();
     }
 
@@ -85,7 +85,7 @@ public class ConvManager implements Serializable {
     public String withdraw() {
         try {
             transactionFailure = null;
-            cashierFacade.withdraw(currentAcct.getAcctNo(), transactionAmount);
+            cashierFacade.withdraw(currentAcct.getRate(), transactionAmount);
             readAcctData();
         } catch (Exception e) {
             handleException(e);
@@ -116,7 +116,7 @@ public class ConvManager implements Serializable {
     public String deposit() {
         try {
             transactionFailure = null;
-            cashierFacade.deposit(currentAcct.getAcctNo(), transactionAmount);
+            cashierFacade.deposit(currentAcct.getRate(), transactionAmount);
             readAcctData();
         } catch (Exception e) {
             handleException(e);
