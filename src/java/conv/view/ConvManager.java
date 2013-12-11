@@ -17,6 +17,7 @@ public class ConvManager implements Serializable {
     @EJB
     private ConvFacade convFacade;
     private ConversionRateDTO currentConversionRate;
+    private double originValue;
     private Exception transactionFailure;
     @Inject
     private Conversation conversation;
@@ -39,7 +40,7 @@ public class ConvManager implements Serializable {
         transactionFailure = e;
     }
 
-    private void readConversionRate() {
+    private void getOriginValue() {
         //todo
         
     }
