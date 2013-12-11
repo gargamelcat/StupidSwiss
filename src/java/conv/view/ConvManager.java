@@ -17,9 +17,9 @@ public class ConvManager implements Serializable {
     @EJB
     private ConvFacade convFacade;
     private ConversionRateDTO currentConversionRate;
-    private double originValue;
-    private String currency1;
-    private String currency2;
+    private int originAmount;
+    private String originCurrency;
+    private String resultCurrency;
     private Exception transactionFailure;
     @Inject
     private Conversation conversation;
@@ -77,33 +77,51 @@ public class ConvManager implements Serializable {
      */
     public int convert() {
         //convFacade.convert(originValue, currency1, currency2);
-        System.out.println("value: " + originValue + " curency one: " + currency1 + " currency2: " + currency2);
+        System.out.println("value: " + originAmount);
         return 10;
     }
-    
-    
-    public void setOriginValue(int originValue){
-        this.originValue = originValue;
+
+    /**
+     * @return the originAmount
+     */
+    public int getOriginAmount() {
+        return originAmount;
     }
+
+    /**
+     * @param originAmount the originAmount to set
+     */
+    public void setOriginAmount(int originAmount) {
+        this.originAmount = originAmount;
+    }
+
+    /**
+     * @return the originCurrency
+     */
+    public String getOriginCurrency() {
+        return originCurrency;
+    }
+
+    /**
+     * @param originCurrency the originCurrency to set
+     */
+    public void setOriginCurrency(String originCurrency) {
+        this.originCurrency = originCurrency;
+    }
+
+    /**
+     * @return the resultCurrency
+     */
+    public String getResultCurrency() {
+        return resultCurrency;
+    }
+
+    /**
+     * @param resultCurrency the resultCurrency to set
+     */
+    public void setResultCurrency(String resultCurrency) {
+        this.resultCurrency = resultCurrency;
+    }
+
     
-    public void setCurrency1(String currency1){
-        this.currency1 = currency1;
-    }
-        
-    public void setCurrency2(double originValue){
-        this.currency2 = currency2;
-    }
-    
-    
-    public double getOriginValue(){
-        return originValue;
-    }
-    
-    public String geturrency1(){
-        return currency1;
-    }
-        
-    public String getCurrency2(){
-        return currency2;
-    }
 }
