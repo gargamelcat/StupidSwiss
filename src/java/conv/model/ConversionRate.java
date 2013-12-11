@@ -55,16 +55,6 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
     }
 
     /**
-     * Get the value of balance
-     *
-     * @return the value of balance
-     */
-    @Override
-    public int getBalance() {
-        return balance;
-    }
-
-    /**
      * Get the value of account number.
      *
      * @return the value of account number.

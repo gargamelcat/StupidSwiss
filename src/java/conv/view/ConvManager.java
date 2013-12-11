@@ -15,13 +15,8 @@ public class ConvManager implements Serializable {
 
     private static final long serialVersionUID = 16247164405L;
     @EJB
-    private ConvFacade cashierFacade;
-    private ConversionRateDTO currentAcct;
-    private String newAccountHolderFirstName;
-    private String newAccountHolderLastName;
-    private Integer newAccountBalance;
-    private Integer transactionAmount;
-    private Integer searchedAcct;
+    private ConvFacade convFacade;
+    private ConversionRateDTO currentConversionRate;
     private Exception transactionFailure;
     @Inject
     private Conversation conversation;
@@ -44,9 +39,9 @@ public class ConvManager implements Serializable {
         transactionFailure = e;
     }
 
-    private void readAcctData() {
-        searchedAcct = currentAcct.getRate();
-        findAccount();
+    private void readConversionRate() {
+        return currentConversionRate.getRate();
+        
     }
 
     /**
@@ -82,154 +77,7 @@ public class ConvManager implements Serializable {
      * <code>setTransactionAmount</code> from the account specified by
      * <code>currentAcct.getAcctNo()</code>.
      */
-    public String withdraw() {
-        try {
-            transactionFailure = null;
-            cashierFacade.withdraw(currentAcct.getRate(), transactionAmount);
-            readAcctData();
-        } catch (Exception e) {
-            handleException(e);
-        }
-        return jsf22Bugfix();
-    }
-
-    /**
-     * Searches for the account specified by the latest call to
-     * <code>setSearchedAcct</code>.
-     */
-    public String findAccount() {
-        try {
-            startConversation();
-            transactionFailure = null;
-            currentAcct = cashierFacade.findAccount(searchedAcct);
-        } catch (Exception e) {
-            handleException(e);
-        }
-        return jsf22Bugfix();
-    }
-
-    /**
-     * Deposits the amount set by the latest call to
-     * <code>setTransactionAmount</code> from the account specified by
-     * <code>currentAcct.getAcctNo()</code>.
-     */
-    public String deposit() {
-        try {
-            transactionFailure = null;
-            cashierFacade.deposit(currentAcct.getRate(), transactionAmount);
-            readAcctData();
-        } catch (Exception e) {
-            handleException(e);
-        }
-        return jsf22Bugfix();
-    }
-
-    /**
-     * Creates a new account. The holder's name is specified by the latest calls
-     * to
-     * <code>setNewAccountHolderFirstName</code> and
-     * <code>setNewAccountHolderLastName</code>. The initial balance is
-     * specified by the latest call to
-     * <code>setNewAccountBalance</code>.
-     */
-    public String createAccount() {
-        try {
-            startConversation();
-            transactionFailure = null;
-            currentAcct = cashierFacade.createAccount(newAccountHolderFirstName,
-                    newAccountHolderLastName, newAccountBalance);
-        } catch (Exception e) {
-            handleException(e);
-        }
-        return jsf22Bugfix();
-    }
-
-    /**
-     * Set the value of searchedAcct
-     *
-     * @param searchedAcct new value of searchedAcct
-     */
-    public void setSearchedAcct(Integer searchedAcct) {
-        this.searchedAcct = searchedAcct;
-    }
-
-    /**
-     * Never used but JSF does not support write-only properties.
-     */
-    public Integer getSearchedAcct() {
-        return null;
-    }
-
-    /**
-     * Set the value of transactionAmount
-     *
-     * @param transactionAmount new value of transactionAmount
-     */
-    public void setTransactionAmount(Integer transactionAmount) {
-        this.transactionAmount = transactionAmount;
-    }
-
-    /**
-     * Never used but JSF does not support write-only properties.
-     */
-    public Integer getTransactionAmount() {
-        return null;
-    }
-
-    /**
-     * Set the value of newAccountBalance
-     *
-     * @param newAccountBalance new value of newAccountBalance
-     */
-    public void setNewAccountBalance(Integer newAccountBalance) {
-        this.newAccountBalance = newAccountBalance;
-    }
-
-    /**
-     * Never used but JSF does not support write-only properties.
-     */
-    public Integer getNewAccountBalance() {
-        return null;
-    }
-
-    /**
-     * Set the value of newAccountHolderLastName
-     *
-     * @param newAccountHolderLastName new value of newAccountHolderLastName
-     */
-    public void setNewAccountHolderLastName(String newAccountHolderLastName) {
-        this.newAccountHolderLastName = newAccountHolderLastName;
-    }
-
-    /**
-     * Never used but JSF does not support write-only properties.
-     */
-    public String getNewAccountHolderLastName() {
-        return null;
-    }
-
-    /**
-     * Set the value of newAccountHolderFirstName
-     *
-     * @param newAccountHolderFirstName new value of newAccountHolderFirstName
-     */
-    public void setNewAccountHolderFirstName(String newAccountHolderFirstName) {
-        this.newAccountHolderFirstName = newAccountHolderFirstName;
-    }
-
-    /**
-     * Never used but JSF does not support write-only properties.
-     */
-    public String getNewAccountHolderFirstName() {
-        return null;
-    }
-
-    /**
-     * Get the value of currentAcct
-     *
-     * @return the value of currentAcct
-     */
-    public ConversionRateDTO getCurrentAcct() {
-        return currentAcct;
+    public int convert() {
+        convFacade.convert(currentConversionRate.getOriginCurrency(), currentConversionRate.getResultCurrency());
     }
 }
