@@ -1,23 +1,24 @@
 package conv.model;
 
 import java.io.Serializable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A persistent representation of an account.
  */
 @Entity
+@Table(name = "CONVERSIONRATE")
 public class ConversionRate implements ConversionRateDTO, Serializable {
 
     private static final long serialVersionUID = 16247164401L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int convRate;
-    private String originCurrency;
-    private String resultCurrency;
+    @EmbeddedId
+    private ConvRatePK convRatePK;
+    private double convRate;
 
     /**
      * Creates a new instance of Account
@@ -28,10 +29,9 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
     /**
      * Creates a new instance of Account
      */
-    public ConversionRate(int convRate, String firstName, String lastName) {
+    public ConversionRate(ConvRatePK primaryKey, double convRate ) {
         this.convRate = convRate;
-        this.originCurrency = firstName;
-        this.resultCurrency = lastName;
+        this.convRatePK = primaryKey;
     }
 
     /**
@@ -41,7 +41,7 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
      */
     @Override
     public String getResultCurrency() {
-        return resultCurrency;
+        return convRatePK.getResultCurrency();
     }
 
     /**
@@ -51,7 +51,7 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
      */
     @Override
     public String getOriginCurrency() {
-        return originCurrency;
+        return convRatePK.getOriginCurrency();
     }
 
     /**
@@ -60,27 +60,27 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
      * @return the value of account number.
      */
     @Override
-    public int getRate() {
+    public double getRate() {
         return convRate;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        return new Integer(convRate).hashCode();
+        return new Double(convRate).hashCode();
     }
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof ConversionRate)) {
+        if (!(object instanceof ConvRatePK)) {
             return false;
         }
         ConversionRate other = (ConversionRate) object;
-        return this.convRate == other.convRate;
+        return this.convRatePK == other.convRatePK;
     }
 
     @Override
     public String toString() {
-        return "conv.model.ConversionRate[id=" + convRate + "]";
+        return "conv.model.ConversionRateCurrencys[origin=" + convRatePK.getOriginCurrency() + "result="+ convRatePK.getResultCurrency() +"]";
     }
 }

@@ -18,23 +18,22 @@
                 <h:outputLabel for="originCurrency" value=" from: "/> 
                 <h:selectOneMenu id="originCurrency" 
                      value="#{convManager.originCurrency}">
-                     <f:selectItem id="item1" itemLabel="Euro" itemValue="Euro1" />
-                     <f:selectItem id="item2" itemLabel="Dollar" itemValue="Dollar1" />
-                     <f:selectItem id="item3" itemLabel="Swedish Krona" itemValue="SEK1" />
-                     <f:selectItem id="item4" itemLabel="Swiss FranC" itemValue="CHF1" />
+                     <f:selectItem id="item1" itemLabel="Euro" itemValue="EURO" />
+                     <f:selectItem id="item2" itemLabel="Dollar" itemValue="DOLLAR" />
+                     <f:selectItem id="item3" itemLabel="Swedish Kronor" itemValue="SEK" />
+                     <f:selectItem id="item4" itemLabel="Swiss Franc" itemValue="CHF" />
                  </h:selectOneMenu>
                 <h:outputLabel for="resultCurrency" value=" to: "/>
                 <h:selectOneMenu id="resultCurrency" 
                      value="#{convManager.resultCurrency}">
-                     <f:selectItem id="item5" itemLabel="Euro" itemValue="Euro2" />
-                     <f:selectItem id="item6" itemLabel="Dollar" itemValue="Dollar2" />
-                     <f:selectItem id="item7" itemLabel="Swedish Krona" itemValue="SEK2" />
-                     <f:selectItem id="item8" itemLabel="Swiss FranC" itemValue="CHF2" />
+                     <f:selectItem id="item5" itemLabel="Euro" itemValue="EURO" />
+                     <f:selectItem id="item6" itemLabel="Dollar" itemValue="DOLLAR" />
+                     <f:selectItem id="item7" itemLabel="Swedish Kronor" itemValue="SEK" />
+                     <f:selectItem id="item8" itemLabel="Swiss Franc" itemValue="CHF" />
                 </h:selectOneMenu>
               </p>  
-                                <h:outputText value="CONVERTED AMOUNT" />
-
-            
+                                <h:outputLabel for="convertedValue" rendered="#{convManager.convertedValue != null}"  value="Converted value:   "/>
+                                <h:outputText id="convertedValue" value="#{convManager.convertedValue}"/>      
             <p>
                 <h:commandButton value="Convert" action="#{convManager.convert}"/>
             </p>

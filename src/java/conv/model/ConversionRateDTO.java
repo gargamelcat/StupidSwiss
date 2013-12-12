@@ -9,7 +9,7 @@ public interface ConversionRateDTO {
      *
      * @return the account number.
      */
-    int getRate();
+    double getRate();
 
     /**
      * Gets the first name of the holder of this Account.

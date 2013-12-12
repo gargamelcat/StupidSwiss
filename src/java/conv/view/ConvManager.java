@@ -17,9 +17,10 @@ public class ConvManager implements Serializable {
     @EJB
     private ConvFacade convFacade;
     private ConversionRateDTO currentConversionRate;
-    private int originAmount;
+    private double originAmount;
     private String originCurrency;
     private String resultCurrency;
+    private double convertedValue;
     private Exception transactionFailure;
     @Inject
     private Conversation conversation;
@@ -75,23 +76,24 @@ public class ConvManager implements Serializable {
      * <code>setTransactionAmount</code> from the account specified by
      * <code>currentAcct.getAcctNo()</code>.
      */
-    public int convert() {
+    public void convert() {
         //convFacade.convert(originValue, currency1, currency2);
-        System.out.println("value: " + originAmount);
-        return 10;
+        System.out.println(originCurrency + "/"+ resultCurrency);
+        convertedValue = convFacade.convertCurrency(originAmount, originCurrency,resultCurrency);
+
     }
 
     /**
      * @return the originAmount
      */
-    public int getOriginAmount() {
+    public double getOriginAmount() {
         return originAmount;
     }
 
     /**
      * @param originAmount the originAmount to set
      */
-    public void setOriginAmount(int originAmount) {
+    public void setOriginAmount(double originAmount) {
         this.originAmount = originAmount;
     }
 
@@ -122,6 +124,13 @@ public class ConvManager implements Serializable {
     public void setResultCurrency(String resultCurrency) {
         this.resultCurrency = resultCurrency;
     }
+    
+    public double getConvertedValue(){
+        return convertedValue;
+    }
 
+    public void setConvertedValue(double convertedValue){
+        this.convertedValue = convertedValue;
+    }
     
 }
