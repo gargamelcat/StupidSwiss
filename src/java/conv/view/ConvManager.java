@@ -72,15 +72,10 @@ public class ConvManager implements Serializable {
     }
 
     /**
-     * Withdraws the amount set by the latest call to
-     * <code>setTransactionAmount</code> from the account specified by
-     * <code>currentAcct.getAcctNo()</code>.
+     * Converts the amount of the origin currency into the the result currency.
      */
     public void convert() {
-        //convFacade.convert(originValue, currency1, currency2);
-        System.out.println(originCurrency + "/"+ resultCurrency);
         convertedValue = convFacade.convertCurrency(originAmount, originCurrency,resultCurrency);
-
     }
 
     /**

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * A persistent representation of an account.
+ * A persistent representation of a conversion rate.
  */
 @Entity
 @Table(name = "CONVERSIONRATE")
@@ -21,13 +21,13 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
     private double convRate;
 
     /**
-     * Creates a new instance of Account
+     * Creates a new instance of ConversionRate
      */
     public ConversionRate() {
     }
 
     /**
-     * Creates a new instance of Account
+     * Creates a new instance of ConversionRate.
      */
     public ConversionRate(ConvRatePK primaryKey, double convRate ) {
         this.convRate = convRate;
@@ -35,9 +35,9 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
     }
 
     /**
-     * Get the value of lastNAme
+     * Get the value of resultCurrency
      *
-     * @return the value of lastNAme
+     * @return the value of resultCurrency
      */
     @Override
     public String getResultCurrency() {
@@ -45,9 +45,9 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
     }
 
     /**
-     * Get the value of firstName
+     * Get the value of originCurrency
      *
-     * @return the value of firstName
+     * @return the value of originCurrency
      */
     @Override
     public String getOriginCurrency() {
@@ -55,9 +55,9 @@ public class ConversionRate implements ConversionRateDTO, Serializable {
     }
 
     /**
-     * Get the value of account number.
+     * Get the value of convRate
      *
-     * @return the value of account number.
+     * @return the value of convRate.
      */
     @Override
     public double getRate() {

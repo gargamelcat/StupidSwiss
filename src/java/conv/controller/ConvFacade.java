@@ -12,26 +12,22 @@ import javax.persistence.PersistenceContext;
 
 /**
  * A controller. All calls to the model that are executed because of an action taken by
- * the cashier pass through here.
+ * the ConvManager pass through here.
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class ConvFacade {
     @PersistenceContext(unitName = "ConvPU")
     private EntityManager em;
-
-    /**
-     * Withdraws the specified amount.
+    
+     /**
+     * Convert a currency to another one.
      *
-     * @param amount        The amount to withdraw.
+     * @param amount        The amount to convert.
+     * @param originCurrency This is the origin currency that will be converted.
+     * @param resultCurrency The amount is converted in this currency.
      * @throws OverdraftException If withdrawal would result in a negative balance.
      */
-    public int convert(double value, String originCurrency, String resultCurrency) {
-        ConversionRate acct = em.find(ConversionRate.class, originCurrency);
-        return 10;
-    }
-    
-    
     public double convertCurrency(double amountToConvert, String originCurrency, String resultCurrency) {
 
         double convertedAmount = 0;

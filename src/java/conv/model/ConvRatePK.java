@@ -9,7 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * A persistent representation of an account.
+ * A persistent representation of the primary key from ConversionRate.
+ * We use a primary key with two values (origin/result currency). To do so, an extra entity for the primary key is needed.
  */
 @Embeddable
 public class ConvRatePK implements Serializable {

@@ -1,27 +1,27 @@
 package conv.model;
 
 /**
- * The views read-only view of an Account.
+ * The views read-only view of a ConversionRate.
  */
 public interface ConversionRateDTO {
     /**                                     
-     * Gets the number of this Account.
+     * Gets the conversion rate of this conversion rate.
      *
-     * @return the account number.
+     * @return conversion rate
      */
     double getRate();
 
     /**
-     * Gets the first name of the holder of this Account.
+     * Gets the origin currency of this conversion rate.
      *
-     * @return the first name of the holder of this Account.
+     * @return the origin currency of this conversion rate.
      */
     String getOriginCurrency();
 
     /**
-     * Gets the last name of the holder of this Account.
+     * Gets result currency of this conversion rate.
      *
-     * @return the last name of the holder of this Account.
+     * @return the result currency of this conversion rate.
      */
     String getResultCurrency();
 
