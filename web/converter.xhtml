@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Welcome to the Currency Converter</title>
+        <style>
+        .myButton {
+	-moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
+	background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+	background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+	background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+	background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+	background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
+	background-color:#33bdef;
+	-moz-border-radius:19px;
+	-webkit-border-radius:19px;
+	border-radius:19px;
+	border:1px solid #057fd0;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #5b6178;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #019ad2), color-stop(1, #33bdef));
+	background:-moz-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:-webkit-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:-o-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:-ms-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#019ad2', endColorstr='#33bdef',GradientType=0);
+	background-color:#019ad2;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}</style>
+    </h:head>
+    <h:body style="background-color: #E8E8E8 ;">
+        <div style="margin-top:50px;margin-right:auto;margin-left:auto;width:820px;height:400px;border: 1px dotted #666;padding:20px;font-family: LucidaGrande, Geneva, Arial, Helvetica, serif;">
+        <h1 style="text-align: center;">Welcome to the awesome currency converter!</h1>
+
+        <hr/> 
+        <h:form>
+            <h3 >Enter Amount !</h3>
+            <p style="font-size:18px;">
+                <h:outputLabel for="searchedAcct" value="Amount: "/>
+                <h:inputText id="searchedAcct" value="#{convManager.originAmount}"/> 
+                <h:outputLabel for="originCurrency" value=" from: "/> 
+                <h:selectOneMenu id="originCurrency" 
+                     value="#{convManager.originCurrency}">
+                     <f:selectItem id="item1" itemLabel="Euro - €" itemValue="EURO" />
+                     <f:selectItem id="item2" itemLabel="Dollar - $" itemValue="DOLLAR" />
+                     <f:selectItem id="item3" itemLabel="Swedish Kronor - SEK" itemValue="SEK" />
+                     <f:selectItem id="item4" itemLabel="Swiss Franc - CHF" itemValue="CHF" />
+                 </h:selectOneMenu>
+                <h:outputLabel for="resultCurrency" value=" to: "/>
+                <h:selectOneMenu id="resultCurrency" 
+                     value="#{convManager.resultCurrency}">
+                     <f:selectItem id="item5" itemLabel="Euro -€" itemValue="EURO" />
+                     <f:selectItem id="item6" itemLabel="Dollar - $" itemValue="DOLLAR" />
+                     <f:selectItem id="item7" itemLabel="Swedish Kronor - SEK" itemValue="SEK" />
+                     <f:selectItem id="item8" itemLabel="Swiss Franc - CHF" itemValue="CHF" />
+                </h:selectOneMenu>
+              </p>  
+            <p style="font-size:18px;">
+                                <h:outputLabel for="convertedValue" rendered="#{convManager.convertedValue != null}"  value="Converted value:   "/>
+                                <h:outputText id="convertedValue" value="#{convManager.convertedValue}"/>  
+            </p>
+            <p style="margin-left:350px;">
+            <h:commandButton value="Convert" action="#{convManager.convert}" class="myButton" />
+            </p>
+
+        </h:form>
+        </div>
+    </h:body>
+</html>
