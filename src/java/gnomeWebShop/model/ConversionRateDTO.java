@@ -1,4 +1,4 @@
-package conv.model;
+package gnomeWebShop.model;
 
 /**
  * The views read-only view of a ConversionRate.

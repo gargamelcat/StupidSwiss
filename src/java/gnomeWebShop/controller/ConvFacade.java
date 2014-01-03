@@ -1,8 +1,8 @@
-package conv.controller;
+package gnomeWebShop.controller;
 
-import conv.model.ConvRatePK;
-import conv.model.ConversionRate;
-import conv.model.ConversionRateDTO;
+import gnomeWebShop.model.ConvRatePK;
+import gnomeWebShop.model.ConversionRate;
+import gnomeWebShop.model.ConversionRateDTO;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;

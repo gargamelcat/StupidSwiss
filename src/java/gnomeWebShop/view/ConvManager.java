@@ -1,7 +1,7 @@
-package conv.view;
+package gnomeWebShop.view;
 
-import conv.controller.ConvFacade;
-import conv.model.ConversionRateDTO;
+import gnomeWebShop.controller.ConvFacade;
+import gnomeWebShop.model.ConversionRateDTO;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
