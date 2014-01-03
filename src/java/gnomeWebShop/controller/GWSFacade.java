@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
-public class ConvFacade {
+public class GWSFacade {
     @PersistenceContext(unitName = "ConvPU")
     private EntityManager em;
     

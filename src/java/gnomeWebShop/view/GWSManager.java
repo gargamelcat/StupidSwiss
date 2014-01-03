@@ -1,6 +1,6 @@
 package gnomeWebShop.view;
 
-import gnomeWebShop.controller.ConvFacade;
+import gnomeWebShop.controller.GWSFacade;
 import gnomeWebShop.model.ConversionRateDTO;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -11,11 +11,11 @@ import javax.inject.Named;
 
 @Named("convManager")
 @ConversationScoped
-public class ConvManager implements Serializable {
+public class GWSManager implements Serializable {
 
     private static final long serialVersionUID = 16247164405L;
     @EJB
-    private ConvFacade convFacade;
+    private GWSFacade convFacade;
     private ConversionRateDTO currentConversionRate;
     private double originAmount;
     private String originCurrency;
