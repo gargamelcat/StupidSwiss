@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package conv.model;
+package gnomeWebShop.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

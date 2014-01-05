@@ -1,9 +1,11 @@
 package gnomeWebShop.controller;
 
-import conv.model.Client;
+import gnomeWebShop.model.Client;
+import gnomeWebShop.model.Gnome;
 import gnomeWebShop.model.ConvRatePK;
 import gnomeWebShop.model.ConversionRate;
 import gnomeWebShop.model.ConversionRateDTO;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -61,11 +63,11 @@ public class GWSFacade {
         
         if(client != null){
             if(isAdmin){
-                if (client.getAdmin() == true && client.getPassword().equals(password)){
+                if (client.getAdmin() == 1 && client.getPassword().equals(password)){
                     loginSuccessful = true;
                 }
             }else{
-                if (client.getAdmin() == false && client.getPassword().equals(password)){
+                if (client.getAdmin() == 0 && client.getPassword().equals(password)){
                     loginSuccessful = true;
                 }
             }
@@ -78,7 +80,7 @@ public class GWSFacade {
         
         boolean result;
         try{
-            Client client = new Client(name, password, isAdmin, false);
+            Client client = new Client(name, password, 0, 0);
             em.persist(client);
             result = true;
         }catch(Exception e){
@@ -88,5 +90,33 @@ public class GWSFacade {
         return result;
     }
 
-
+    public void addNewGnomeToInventory(String name, int amount){
+        try{
+            Gnome gnome = new Gnome(name, amount);
+            em.persist(gnome);
+        }catch(Exception e){
+            System.out.println("Error when adding a new gnome.");
+        }
+    }
+    
+        public void removeGnomeFromInventory(String name, int amount){
+        try{
+            Gnome gnome = new Gnome(name, amount);
+            em.persist(gnome);
+        }catch(Exception e){
+            System.out.println("Error when adding a new gnome.");
+        }
+        }    
+        
+        public ArrayList<Gnome> getInventory(){
+        return null;
+        }
+        
+        public void buyGnome(String gnomeName, int amount){
+            
+        }
+        
+        public void addGnomeToInventory(String gnomeName, int amount){
+            
+        }
 }

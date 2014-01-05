@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package conv.model;
+package gnomeWebShop.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -47,11 +47,11 @@ public class Client implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ADMINISTRATOR")
-    private boolean administrator;
+    private int administrator;
     @Basic(optional = false)
     @NotNull
     @Column(name = "BANNED")
-    private boolean banned;
+    private int banned;
 
     public Client() {
     }
@@ -60,7 +60,7 @@ public class Client implements Serializable {
         this.name = name;
     }
 
-    public Client(String name, String password, boolean admin, boolean banned) {
+    public Client(String name, String password, int admin, int banned) {
         this.name = name;
         this.password = password;
         this.administrator = admin;
@@ -83,19 +83,19 @@ public class Client implements Serializable {
         this.password = password;
     }
 
-    public boolean getAdmin() {
+    public int getAdmin() {
         return administrator;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(int admin) {
         this.administrator = admin;
     }
 
-    public boolean getBanned() {
+    public int getBanned() {
         return banned;
     }
 
-    public void setBanned(boolean banned) {
+    public void setBanned(int banned) {
         this.banned = banned;
     }
 
