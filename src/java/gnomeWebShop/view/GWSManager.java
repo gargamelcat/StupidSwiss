@@ -1,5 +1,6 @@
 package gnomeWebShop.view;
 
+import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import gnomeWebShop.controller.GWSFacade;
 import gnomeWebShop.model.ConversionRateDTO;
 import java.io.Serializable;
@@ -72,9 +73,11 @@ public class GWSManager implements Serializable {
      * @return Login the user.
      */
     public String login() {
-        /*if(gwsFacade.login(username, password,false)){
-          return "gnomeshop.xhtml?faces-redirect=true";
-        }*/
+        if(gwsFacade.login(username, password,false)){
+          
+          return "shop.xhtml?faces-redirect=true";
+        }
+        
         return "login.xhtml?faces-redirect=true";    
     }
     
