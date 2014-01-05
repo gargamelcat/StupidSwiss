@@ -99,13 +99,12 @@ public class GWSFacade {
             Gnome gnome = em.find(Gnome.class, gnomeName);
             if (gnome != null) {
                 if (gnome.getAmount() >= amount) {
-                    em.getTransaction().begin();
                     gnome.setAmount(gnome.getAmount() - amount);
-                    em.getTransaction().commit();
                     buyingSuccessful = true;
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Error when trying to buy a gnome");
         }
         return buyingSuccessful;
@@ -116,9 +115,7 @@ public class GWSFacade {
         Gnome gnome = em.find(Gnome.class, gnomeName);
 
         if (gnome != null) {
-            em.getTransaction().begin();
             gnome.setAmount(gnome.getAmount() + amount);
-            em.getTransaction().commit();
         }
         return addingSuccessful;
     }
@@ -128,9 +125,7 @@ public class GWSFacade {
         Client client = em.find(Client.class, userName);
 
         if (client != null) {
-            em.getTransaction().begin();
             client.setBanned(1);
-            em.getTransaction().commit();
         }
         return banningSuccessful;
     }
@@ -140,9 +135,7 @@ public class GWSFacade {
         Client client = em.find(Client.class, userName);
 
         if (client != null) {
-            em.getTransaction().begin();
             client.setBanned(0);
-            em.getTransaction().commit();
         }
         return unbanningSuccessful;
     }
