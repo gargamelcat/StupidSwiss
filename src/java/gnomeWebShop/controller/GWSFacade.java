@@ -1,5 +1,6 @@
 package gnomeWebShop.controller;
 
+import conv.model.Client;
 import gnomeWebShop.model.ConvRatePK;
 import gnomeWebShop.model.ConversionRate;
 import gnomeWebShop.model.ConversionRateDTO;
@@ -50,6 +51,41 @@ public class GWSFacade {
                     System.out.println(convertedAmount);
         }        
         return convertedAmount;
+    }
+    
+    public boolean login(String name, String password, boolean isAdmin){
+        
+        boolean loginSuccessful = false;
+        
+        Client client = em.find(Client.class, name);
+        
+        if(client != null){
+            if(isAdmin){
+                if (client.getAdmin() == true && client.getPassword().equals(password)){
+                    loginSuccessful = true;
+                }
+            }else{
+                if (client.getAdmin() == false && client.getPassword().equals(password)){
+                    loginSuccessful = true;
+                }
+            }
+        }
+        
+        return loginSuccessful;
+    }
+    
+    public boolean register(String name, String password, boolean isAdmin){
+        
+        boolean result;
+        try{
+            Client client = new Client(name, password, isAdmin, false);
+            em.persist(client);
+            result = true;
+        }catch(Exception e){
+            result = false;
+            System.out.println("Error when registering a user.");
+        }
+        return result;
     }
 
 
