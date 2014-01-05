@@ -51,16 +51,14 @@
 
 <h:form>
     
- <h:panelGrid columns="2">
         <h:outputText value="Username" />
         <h:inputText id="username" value="#{shopManager.username}"/>
         <h:outputText value="Password" />
         <h:inputText id="password" value="#{shopManager.password}" />
- </h:panelGrid>
 
  <h:commandButton value="Login" action="#{shopManager.login}" class="myButton" />
  <h:commandButton value="Register" action="#{shopManager.register}" class="myButton" />
- <h:commandButton value="Admin Login" action="#{shopManager.adminLogin}" class="myButton" />
+ <h:commandButton value="Admin Login" action="#{shopManager.loginAdmin}" class="myButton" />
 </h:form>
     
 </h:body>

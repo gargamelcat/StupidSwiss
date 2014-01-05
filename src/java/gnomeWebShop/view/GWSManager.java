@@ -113,15 +113,17 @@ public class GWSManager implements Serializable {
 
      /**
      * 
+     * @param password
      */
-    public void setPassword() {
+    public void setPassword(String password) {
         this.password = password;
     }
     
      /**
      * 
+     * @param username
      */
-    public void setUsername() {
+    public void setUsername(String username) {
         this.username = username;
     }
   
