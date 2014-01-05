@@ -122,4 +122,28 @@ public class GWSFacade {
         }
         return addingSuccessful;
     }
+
+    public boolean bannUser(String userName) {
+        boolean banningSuccessful = false;
+        Client client = em.find(Client.class, userName);
+
+        if (client != null) {
+            em.getTransaction().begin();
+            client.setBanned(1);
+            em.getTransaction().commit();
+        }
+        return banningSuccessful;
+    }
+    
+      public boolean unbannUser(String userName) {
+        boolean unbanningSuccessful = false;
+        Client client = em.find(Client.class, userName);
+
+        if (client != null) {
+            em.getTransaction().begin();
+            client.setBanned(0);
+            em.getTransaction().commit();
+        }
+        return unbanningSuccessful;
+    }
 }
