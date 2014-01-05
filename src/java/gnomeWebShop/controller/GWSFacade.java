@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
  * A controller. All calls to the model that are executed because of an action taken by
  * the ConvManager pass through here.
  */
+//git test 
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class GWSFacade {
