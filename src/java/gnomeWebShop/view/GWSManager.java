@@ -73,7 +73,6 @@ public class GWSManager implements Serializable {
      * @return Login the user.
      */
     public String login() {
-        gwsFacade.getInventory();
         if(gwsFacade.login(username, password,false)){
           
           return "shop.xhtml?faces-redirect=true";
