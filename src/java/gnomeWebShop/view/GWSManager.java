@@ -9,18 +9,15 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@Named("convManager")
+@Named("shopManager")
 @ConversationScoped
 public class GWSManager implements Serializable {
 
     private static final long serialVersionUID = 16247164405L;
     @EJB
-    private GWSFacade convFacade;
-    private ConversionRateDTO currentConversionRate;
-    private double originAmount;
-    private String originCurrency;
-    private String resultCurrency;
-    private double convertedValue;
+    private GWSFacade gwsFacade;
+    private String username;
+    private String password;
     private Exception transactionFailure;
     @Inject
     private Conversation conversation;
@@ -72,60 +69,61 @@ public class GWSManager implements Serializable {
     }
 
     /**
-     * Converts the amount of the origin currency into the the result currency.
+     * @return Login the user.
      */
-    public void convert() {
-        convertedValue = convFacade.convertCurrency(originAmount, originCurrency,resultCurrency);
-    }
-
-    /**
-     * @return the originAmount
-     */
-    public double getOriginAmount() {
-        return originAmount;
-    }
-
-    /**
-     * @param originAmount the originAmount to set
-     */
-    public void setOriginAmount(double originAmount) {
-        this.originAmount = originAmount;
-    }
-
-    /**
-     * @return the originCurrency
-     */
-    public String getOriginCurrency() {
-        return originCurrency;
-    }
-
-    /**
-     * @param originCurrency the originCurrency to set
-     */
-    public void setOriginCurrency(String originCurrency) {
-        this.originCurrency = originCurrency;
-    }
-
-    /**
-     * @return the resultCurrency
-     */
-    public String getResultCurrency() {
-        return resultCurrency;
-    }
-
-    /**
-     * @param resultCurrency the resultCurrency to set
-     */
-    public void setResultCurrency(String resultCurrency) {
-        this.resultCurrency = resultCurrency;
+    public String login() {
+        /*if(gwsFacade.login(username, password,false)){
+          return "gnomeshop.xhtml?faces-redirect=true";
+        }*/
+        return "login.xhtml?faces-redirect=true";    
     }
     
-    public double getConvertedValue(){
-        return convertedValue;
-    }
-
-    public void setConvertedValue(double convertedValue){
-        this.convertedValue = convertedValue;
+     /**
+     * @return Login as Admin.
+     */
+    public String loginAdmin() {
+        if(gwsFacade.login(username, password,true)){
+            return "adminpanel.xhtml?faces-redirect=true";
+        }
+        return "login.xhtml?faces-redirect=true";
     }
     
+     /**
+     * Register a new user.
+     */
+    public void register() {
+        gwsFacade.register(username, password, false);
+    }
+
+    
+  
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+     /**
+     * @return the username
+     */
+    public String getPassword() {
+        return password;
+    }
+
+     /**
+     * 
+     */
+    public void setPassword() {
+        this.password = password;
+    }
+    
+     /**
+     * 
+     */
+    public void setUsername() {
+        this.username = username;
+    }
+  
+
 }
