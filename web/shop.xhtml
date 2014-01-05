@@ -47,10 +47,24 @@
 	top:1px;
 }</style>
 </h:head>
-<h:body>
-
+<h:body  >
+    <div rendered="#{userManager.loggedIn}">
     <p> Welcome to the gnome shop!</p>
     
+    <h:dataTable value="#{userManager.inventory}" var="item">
+        <h:column>#{item.name}</h:column>
+        <h:column>#{item.amount}</h:column>
+    </h:dataTable>
+    
+    
+    <h:form>
+    <h:commandButton value="Logout" action="#{userManager.logout}" class="myButton" />
+    </h:form>
+    </div>
+    
+    <div rendered="not #{userManager.loggedIn}">
+        You have to login first.
+    </div>
 </h:body>
 
 </html>
