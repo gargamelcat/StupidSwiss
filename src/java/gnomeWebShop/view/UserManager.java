@@ -89,9 +89,7 @@ public class UserManager implements Serializable{
         gwsFacade.register(username, password, false);
     }
     
-   
-
-        
+       
    public void setShoppingCart(ArrayList<Gnome> shoppingCart) {
         this.shoppingCart = shoppingCart;
    }
@@ -115,12 +113,14 @@ public class UserManager implements Serializable{
       if(!trobat) shoppingCart.add(gnometemp);
     }
     
-    public void buy(){     
-        if(gwsFacade.buyGnome(gnometype, amount)) {
-            shoppingCart = new ArrayList<Gnome>();
+    public void buy(){    
+     for(int i=0; i< shoppingCart.size(); i++){ 
+        if(gwsFacade.buyGnome(shoppingCart.get(i).getName(), shoppingCart.get(i).getAmount())) {     
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You successfully bought the gnomes!"));
         }
         else FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Some error occurred during the buying process"));
+     }
+     shoppingCart = new ArrayList<Gnome>();
     }
     
      public void setGnometype(String gnometype) {
