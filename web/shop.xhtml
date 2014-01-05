@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
     <title>Gnome WebShop Admin Panel</title>
     <style>
@@ -48,23 +49,75 @@
 }</style>
 </h:head>
 <h:body  >
-    <div rendered="#{userManager.loggedIn}">
+    <h:panelGroup rendered="#{userManager.loggedIn}">
     <p> Welcome to the gnome shop!</p>
     
-    <h:dataTable value="#{userManager.inventory}" var="item">
-        <h:column>#{item.name}</h:column>
-        <h:column>#{item.amount}</h:column>
+    <h:dataTable value="#{userManager.inventory}" var="item" >
+        
+        <h:column>
+        <f:facet name="header">
+                <h:outputText value="Select" />
+            </f:facet>    
+        </h:column>
+        
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Gnome Type" />
+            </f:facet>
+            
+            #{item.name}      
+        </h:column>
+        
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Amount" />
+            </f:facet>
+            #{item.amount}
+        </h:column>
     </h:dataTable>
     
-    
     <h:form>
-    <h:commandButton value="Logout" action="#{userManager.logout}" class="myButton" />
+    <h:selectOneMenu value="#{userManager.gnometype}">
+        <f:selectItems value="#{userManager.inventory}" var="gnome" itemValue="#{gnome.name}" itemLabel="#{gnome.name}"/>
+    </h:selectOneMenu>  
+    <h:inputText value="#{userManager.amount}" />
+    <h:commandButton value="Add to Cart" action="#{userManager.addCart}" class="myButton" />
+
     </h:form>
-    </div>
+   
+   </h:panelGroup>
+
+    Your Shopping Cart
+    <h:dataTable value="#{userManager.shoppingCart}" var="item" >
+             
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Gnome Type" />
+            </f:facet>
+            
+            #{item.name}      
+        </h:column>
+        
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Amount" />
+            </f:facet>
+            #{item.amount}
+        </h:column>
+    </h:dataTable>
     
-    <div rendered="not #{userManager.loggedIn}">
-        You have to login first.
-    </div>
+    <h:form>   
+    
+    <h:commandButton value="Buy!" action="#{userManager.buy}" class="myButton" />
+    <h:commandButton value="Logout" action="#{userManager.logout}" class="myButton" />
+
+    
+    </h:form>
+    
+    <h:panelGroup rendered="#{!userManager.loggedIn}">
+        You have to login first. Please login <a href="login.xhtml">here</a>;
+    </h:panelGroup>
+    
 </h:body>
 
 </html>
