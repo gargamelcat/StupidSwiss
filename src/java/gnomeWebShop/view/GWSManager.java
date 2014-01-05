@@ -2,7 +2,6 @@ package gnomeWebShop.view;
 
 import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import gnomeWebShop.controller.GWSFacade;
-import gnomeWebShop.model.ConversionRateDTO;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;

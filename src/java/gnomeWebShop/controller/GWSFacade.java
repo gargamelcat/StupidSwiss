@@ -2,9 +2,6 @@ package gnomeWebShop.controller;
 
 import gnomeWebShop.model.Client;
 import gnomeWebShop.model.Gnome;
-import gnomeWebShop.model.ConvRatePK;
-import gnomeWebShop.model.ConversionRate;
-import gnomeWebShop.model.ConversionRateDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,37 +24,6 @@ public class GWSFacade {
 
     @PersistenceContext(unitName = "ConvPU")
     private EntityManager em;
-
-    /**
-     * Convert a currency to another one.
-     *
-     * @param amount The amount to convert.
-     * @param originCurrency This is the origin currency that will be converted.
-     * @param resultCurrency The amount is converted in this currency.
-     * @throws OverdraftException If withdrawal would result in a negative
-     * balance.
-     */
-    public double convertCurrency(double amountToConvert, String originCurrency, String resultCurrency) {
-
-        double convertedAmount = 0;
-        System.out.println("in facade: " + originCurrency + "/" + resultCurrency);
-
-        //System.out.println(originRate);
-        ConvRatePK convRatePK = new ConvRatePK();
-        convRatePK.setOriginCurrency(originCurrency);
-        convRatePK.setResultCurrency(resultCurrency);
-        ConversionRateDTO found = em.find(ConversionRate.class, convRatePK);
-
-        if (found == null) {
-            System.out.println("not found");
-            throw new EntityNotFoundException("No currency pair found that matches " + originCurrency + "/" + resultCurrency);
-        } else {
-            System.out.println(found.getResultCurrency());
-            convertedAmount = amountToConvert * found.getRate();
-            System.out.println(convertedAmount);
-        }
-        return convertedAmount;
-    }
 
     public boolean login(String name, String password, boolean isAdmin) {
 
@@ -105,10 +71,13 @@ public class GWSFacade {
 
     public void removeGnomeFromInventory(String name, int amount) {
         try {
-            Gnome gnome = new Gnome(name, amount);
-            em.persist(gnome);
+            Gnome gnome = em.find(Gnome.class, name);
+
+            em.getTransaction().begin();
+            em.remove(gnome);
+            em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error when adding a new gnome.");
+            System.out.println("Error when deleting a new gnome.");
         }
     }
 
@@ -116,7 +85,7 @@ public class GWSFacade {
         ArrayList<Gnome> resultList = new ArrayList<>();
         Query query = em.createQuery("SELECT g FROM Gnome g", Gnome.class);
         List<Gnome> tempResultList = query.getResultList();
-        
+
         for (int i = 0; i < tempResultList.size(); i++) {
             resultList.add(tempResultList.get(i));
             System.out.println(tempResultList.get(i).getName());
@@ -124,11 +93,33 @@ public class GWSFacade {
         return resultList;
     }
 
-    public void buyGnome(String gnomeName, int amount) {
-
+    public boolean buyGnome(String gnomeName, int amount) {
+        boolean buyingSuccessful = false;
+        try {
+            Gnome gnome = em.find(Gnome.class, gnomeName);
+            if (gnome != null) {
+                if (gnome.getAmount() >= amount) {
+                    em.getTransaction().begin();
+                    gnome.setAmount(gnome.getAmount() - amount);
+                    em.getTransaction().commit();
+                    buyingSuccessful = true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error when trying to buy a gnome");
+        }
+        return buyingSuccessful;
     }
 
-    public void addGnomeToInventory(String gnomeName, int amount) {
+    public boolean addGnomeToInventory(String gnomeName, int amount) {
+        boolean addingSuccessful = false;
+        Gnome gnome = em.find(Gnome.class, gnomeName);
 
+        if (gnome != null) {
+            em.getTransaction().begin();
+            gnome.setAmount(gnome.getAmount() + amount);
+            em.getTransaction().commit();
+        }
+        return addingSuccessful;
     }
 }
