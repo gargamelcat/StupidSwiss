@@ -85,10 +85,7 @@ public class GWSFacade {
     public void removeGnomeFromInventory(String name, int amount) {
         try {
             Gnome gnome = em.find(Gnome.class, name);
-
-            em.getTransaction().begin();
             em.remove(gnome);
-            em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error when deleting a new gnome.");
         }
