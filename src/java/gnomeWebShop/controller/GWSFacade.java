@@ -33,17 +33,20 @@ public class GWSFacade {
         Client client = em.find(Client.class, name);
 
         if (client != null) {
-            if (isAdmin) {
-                if (client.getAdmin() == 1 && client.getPassword().equals(password)) {
-                    loginSuccessful = true;
-                    loggedInClient = client;
-                }
-            } else {
-                if (client.getAdmin() == 0 && client.getPassword().equals(password)) {
-                    loginSuccessful = true;
-                    loggedInClient = client;
+            if (this.isBanned(client.getName()) == false) {
+                if (isAdmin) {
+                    if (client.getAdmin() == 1 && client.getPassword().equals(password)) {
+                        loginSuccessful = true;
+                        loggedInClient = client;
+                    }
+                } else {
+                    if (client.getAdmin() == 0 && client.getPassword().equals(password)) {
+                        loginSuccessful = true;
+                        loggedInClient = client;
+                    }
                 }
             }
+
         }
 
         return loginSuccessful;
@@ -105,7 +108,7 @@ public class GWSFacade {
 
     public ArrayList<Client> getClients() {
         ArrayList<Client> resultList = new ArrayList<>();
-        Query query = em.createQuery("SELECT c FROM Client c", Client.class);
+        Query query = em.createQuery("SELECT c FROM Client c WHERE c.administrator = 0", Client.class);
         List<Client> tempResultList = query.getResultList();
 
         for (int i = 0; i < tempResultList.size(); i++) {
@@ -168,12 +171,23 @@ public class GWSFacade {
         }
         return returnValue;
     }
-    
-    public boolean isAdmin(String userName){
+
+    public boolean isAdmin(String userName) {
         boolean returnValue = false;
         Client client = em.find(Client.class, userName);
-        if(client != null){
-            if(client.getAdmin()==1){
+        if (client != null) {
+            if (client.getAdmin() == 1) {
+                returnValue = true;
+            }
+        }
+        return returnValue;
+    }
+
+    public boolean isBanned(String userName) {
+        boolean returnValue = false;
+        Client client = em.find(Client.class, userName);
+        if (client != null) {
+            if (client.getBanned() == 1) {
                 returnValue = true;
             }
         }
