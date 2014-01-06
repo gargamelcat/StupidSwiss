@@ -85,13 +85,18 @@ public class GWSFacade {
         return returnValue;
     }
 
-    public void removeGnomeFromInventory(String name, int amount) {
+    public boolean removeGnomeFromInventory(String name) {
+        boolean returnValue = false;
         try {
             Gnome gnome = em.find(Gnome.class, name);
-            em.remove(gnome);
+            if(gnome != null){
+                em.remove(gnome);
+                returnValue = true;
+            }
         } catch (Exception e) {
             System.out.println("Error when deleting a new gnome.");
         }
+        return returnValue;
     }
 
     public ArrayList<Gnome> getInventory() {
@@ -106,9 +111,20 @@ public class GWSFacade {
         return resultList;
     }
 
-    public ArrayList<Client> getClients() {
+    public ArrayList<Client> getUnbannedClients() {
         ArrayList<Client> resultList = new ArrayList<>();
-        Query query = em.createQuery("SELECT c FROM Client c WHERE c.administrator = 0", Client.class);
+        Query query = em.createQuery("SELECT c FROM Client c WHERE c.administrator = 0 AND c.banned = 0 ", Client.class);
+        List<Client> tempResultList = query.getResultList();
+
+        for (int i = 0; i < tempResultList.size(); i++) {
+            resultList.add(tempResultList.get(i));
+        }
+        return resultList;
+    }
+    
+        public ArrayList<Client> getBannedClients() {
+        ArrayList<Client> resultList = new ArrayList<>();
+        Query query = em.createQuery("SELECT c FROM Client c WHERE c.administrator = 0 AND c.banned = 1 ", Client.class);
         List<Client> tempResultList = query.getResultList();
 
         for (int i = 0; i < tempResultList.size(); i++) {
@@ -190,6 +206,14 @@ public class GWSFacade {
             if (client.getBanned() == 1) {
                 returnValue = true;
             }
+        }
+        return returnValue;
+    }
+
+    public boolean isAdminLoggedIn() {
+        boolean returnValue = false;
+        if (loggedInClient != null && loggedInClient.getAdmin() == 1) {
+            returnValue = true;
         }
         return returnValue;
     }
