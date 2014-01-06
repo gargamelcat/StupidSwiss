@@ -168,4 +168,15 @@ public class GWSFacade {
         }
         return returnValue;
     }
+    
+    public boolean isAdmin(String userName){
+        boolean returnValue = false;
+        Client client = em.find(Client.class, userName);
+        if(client != null){
+            if(client.getAdmin()==1){
+                returnValue = true;
+            }
+        }
+        return returnValue;
+    }
 }
