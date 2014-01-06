@@ -73,10 +73,20 @@
 .Header{
     border-bottom: 1px solid #F26C9F;
     
-}</style>
+}
+ul{
+    width:600px;
+    height:20px;
+    margin:20px auto;
+    background-color: #FFF;
+    font-size:20px;
+    text-align: center;
+    padding:30px;
+    list-style-type: none;  
+} </style>
 </h:head>
 <h:body  style="background-image:url('img/bg.jpg');">
-    <h:panelGroup rendered="#{userManager.adminLoggedIn}" layout="block" style="margin:80px auto;background-color: #FFF;height:auto;width:600px;text-align: center;padding: 30px;">
+    <h:panelGroup rendered="#{userManager.adminLoggedIn}" layout="block" style="margin:80px auto;margin-bottom:20px;background-color: #FFF;height:auto;width:600px;text-align: center;padding: 30px;">
     <h:graphicImage  value="img/gnome.png;" style="margin-bottom:30px;"/>
     <p> Welcome to the gnome shop Admin Panel #{userManager.username}!</p>
     
