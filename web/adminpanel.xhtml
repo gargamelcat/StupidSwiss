@@ -25,7 +25,7 @@
 	border:1px solid #057fd0;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
+	color:#000;
 	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
@@ -49,7 +49,7 @@
 }</style>
 </h:head>
 <h:body  style="background-image:url('img/bg.jpg');">
-    <h:panelGroup rendered="#{userManager.loggedIn}" layout="block" style="margin:100px auto;background-color: #FFF;height:auto;width:600px;text-align: center;padding-bottom: 30px;">
+    <h:panelGroup rendered="#{userManager.adminLoggedIn}" layout="block" style="margin:80px auto;background-color: #FFF;height:auto;width:600px;text-align: center;padding: 30px;">
     <h:graphicImage  value="img/gnome.png;" style="margin-bottom:30px;"/>
     <p> Welcome to the gnome shop Admin Panel #{userManager.username}!</p>
     
@@ -96,24 +96,29 @@
     </h:inputText>
     <br/>
     <h:commandButton value="New Gnome Type" action="#{userManager.addNewGnome}" class="myButton" />
-    </h:form>
+    
     <br/>
     <p style="color: #057fd0;font-size:18px;">Edit Users</p>
     <hr/>
+
+    <h:selectOneMenu value="#{userManager.banUsername}">
+        <f:selectItems value="#{userManager.clients}" var="client" itemValue="#{client.name}" itemLabel="#{client.name}"/>
+    </h:selectOneMenu>
+        <h:commandButton value="Ban Client" action="#{userManager.banUsername}" class="myButton" />   
 
     <br/>
     <br/>
     <br/>
     <br/>
     <br/>
-    <h:form>  
+
     <h:commandButton value="Logout" action="#{userManager.logout}" class="myButton" style="font-size:10px;" />
     </h:form>
     
    
     </h:panelGroup>
     <h:panelGroup rendered="#{!userManager.loggedIn}"  layout="block" style="margin:100px auto;background-color: #FFF;height:auto;width:600px;text-align: center;padding-bottom: 30px; padding-top:30px;">
-        You have to login first. Please login <a href="login.xhtml">here</a>;
+        You have to login first as an Admin. Please login <a href="login.xhtml">here</a>;
     </h:panelGroup>
     
 </h:body>

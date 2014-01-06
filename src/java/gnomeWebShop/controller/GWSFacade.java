@@ -105,7 +105,7 @@ public class GWSFacade {
 
     public ArrayList<Client> getClients() {
         ArrayList<Client> resultList = new ArrayList<>();
-        Query query = em.createQuery("SELECT c FROM Clieng c", Client.class);
+        Query query = em.createQuery("SELECT c FROM Client c", Client.class);
         List<Client> tempResultList = query.getResultList();
 
         for (int i = 0; i < tempResultList.size(); i++) {

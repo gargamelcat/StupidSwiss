@@ -7,6 +7,7 @@
 package gnomeWebShop.view;
 
 import gnomeWebShop.controller.GWSFacade;
+import gnomeWebShop.model.Client;
 import gnomeWebShop.model.Gnome;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
@@ -41,9 +42,15 @@ public class UserManager implements Serializable{
     private String gnometypeAdminNew;
     private Integer amountAdminNew;
 
- 
+    private String banUsername;
+
+   
     
     private ArrayList<Gnome> gnomesList;
+    private ArrayList<Client> clientList;
+
+    
+    
     
     private String gnometype;
 
@@ -90,7 +97,17 @@ public class UserManager implements Serializable{
         if(username == null) return false;
         return  true;
     }
+    
+    
+    public boolean isAdminLoggedIn() {
+        if(username == null) return false;
+        else return gwsFacade.isAdmin(username);
+    }
 
+    public ArrayList<Client> getClients(){
+        clientList = gwsFacade.getClients(); 
+        return clientList;
+    }
     /**
      * Register a new user.
      */
@@ -98,6 +115,10 @@ public class UserManager implements Serializable{
         gwsFacade.register(username, password, false);
     }
     
+    
+    public void banUsername(){
+        gwsFacade.bannUser(banUsername);
+    }
        
    public void setShoppingCart(ArrayList<Gnome> shoppingCart) {
         this.shoppingCart = shoppingCart;
@@ -147,6 +168,21 @@ public class UserManager implements Serializable{
     
     //GETTERS AND SETTERS
     
+    public ArrayList<Gnome> getGnomesList() {
+        return gnomesList;
+    }
+
+    public void setGnomesList(ArrayList<Gnome> gnomesList) {
+        this.gnomesList = gnomesList;
+    }
+    
+     public void setBanUsername(String banUsername) {
+        this.banUsername = banUsername;
+    }
+
+    public String getBanUsername() {
+        return banUsername;
+    }
     
      public String getGnometypeAdminNew() {
         return gnometypeAdminNew;
