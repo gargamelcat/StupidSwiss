@@ -130,7 +130,7 @@ public class UserManager implements Serializable {
         if (shoppingCart == null) {
             shoppingCart = new ArrayList<Gnome>();
         }
-        if(gnometype.equals("")){
+        if(gwsFacade.doesGnomeExist(gnometype)){
             Gnome gnometemp;
             gnometemp = new Gnome(gnometype, amount);
             boolean trobat = false;
@@ -149,12 +149,17 @@ public class UserManager implements Serializable {
     }
 
     public void buy() {
+        boolean boughtSuccessful = true;
         for (int i = 0; i < shoppingCart.size(); i++) {
-            if (gwsFacade.buyGnome(shoppingCart.get(i).getName(), shoppingCart.get(i).getAmount())) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You successfully bought the gnomes!"));
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Some error occurred during the buying process"));
+            if (gwsFacade.buyGnome(shoppingCart.get(i).getName(), shoppingCart.get(i).getAmount())== false) {
+                boughtSuccessful = false; 
             }
+        }
+        
+        if(boughtSuccessful){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You successfully bought the gnomes!"));   
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Some error occurred during the buying process")); 
         }
         shoppingCart = new ArrayList<Gnome>();
     }

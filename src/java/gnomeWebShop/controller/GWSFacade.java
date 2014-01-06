@@ -217,4 +217,13 @@ public class GWSFacade {
         }
         return returnValue;
     }
+    
+    public boolean doesGnomeExist(String name){
+        boolean returnValue = false;
+        Gnome gnome = em.find(Gnome.class, name);
+        if(gnome != null){
+            returnValue = true;
+        }
+        return returnValue;
+    }
 }
