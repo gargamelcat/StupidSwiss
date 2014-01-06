@@ -45,7 +45,7 @@ public class UserManager implements Serializable {
     private ArrayList<Gnome> gnomesList;
     private ArrayList<Client> clientList;
 
-    private String gnometype;
+    private String gnometype = null;
 
     private Integer amount = 0;
 
@@ -71,7 +71,7 @@ public class UserManager implements Serializable {
     public String loginAdmin() {
 
         if (!gwsFacade.login(username, password, true)) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login, try again"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login or lack of permissions, try again"));
             username = null;
             password = null;
             return (username = password = null);
@@ -113,8 +113,10 @@ public class UserManager implements Serializable {
         if (gwsFacade.register(username, password, false) == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("User already exists. Try a different name."));
         }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You are now registered to the best online gnome shop!"));
         username = null;
         password = null;
+        shoppingCart = null;
     }
 
     public void banUsername() {
@@ -128,20 +130,22 @@ public class UserManager implements Serializable {
         if (shoppingCart == null) {
             shoppingCart = new ArrayList<Gnome>();
         }
-        Gnome gnometemp;
-        gnometemp = new Gnome(gnometype, amount);
-        boolean trobat = false;
-        for (int i = 0; i < shoppingCart.size(); i++) {
-            if (shoppingCart.get(i).getName().equals(gnometype)) {
-                shoppingCart.get(i).setAmount(shoppingCart.get(i).getAmount() + amount);
-                trobat = true;
+        if(gnometype.equals("")){
+            Gnome gnometemp;
+            gnometemp = new Gnome(gnometype, amount);
+            boolean trobat = false;
+            for (int i = 0; i < shoppingCart.size(); i++) {
+                if (shoppingCart.get(i).getName().equals(gnometype)) {
+                    shoppingCart.get(i).setAmount(shoppingCart.get(i).getAmount() + amount);
+                    trobat = true;
+                }
             }
+            if (!trobat) {
+                shoppingCart.add(gnometemp);
+            }
+            gnometype = null;
+            amount = 0;
         }
-        if (!trobat) {
-            shoppingCart.add(gnometemp);
-        }
-        gnometype = null;
-        amount = 0;
     }
 
     public void buy() {
