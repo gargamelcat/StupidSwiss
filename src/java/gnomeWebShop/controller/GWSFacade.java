@@ -24,6 +24,7 @@ public class GWSFacade {
 
     @PersistenceContext(unitName = "ConvPU")
     private EntityManager em;
+    private Client loggedInClient = null;
 
     public boolean login(String name, String password, boolean isAdmin) {
 
@@ -35,38 +36,46 @@ public class GWSFacade {
             if (isAdmin) {
                 if (client.getAdmin() == 1 && client.getPassword().equals(password)) {
                     loginSuccessful = true;
+                    loggedInClient = client;
                 }
             } else {
                 if (client.getAdmin() == 0 && client.getPassword().equals(password)) {
                     loginSuccessful = true;
+                    loggedInClient = client;
                 }
             }
         }
 
         return loginSuccessful;
     }
+    
+    public void logout(){
+        loggedInClient = null;
+    }
 
     public boolean register(String name, String password, boolean isAdmin) {
 
         boolean result;
+        Client client = new Client(name, password, 0, 0);
         try {
-            Client client = new Client(name, password, 0, 0);
             em.persist(client);
             result = true;
         } catch (Exception e) {
             result = false;
             System.out.println("Error when registering a user.");
         }
+        client = new Client();
         return result;
     }
 
     public void addNewGnomeToInventory(String name, int amount) {
+        Gnome gnome = new Gnome(name, amount);
         try {
-            Gnome gnome = new Gnome(name, amount);
             em.persist(gnome);
         } catch (Exception e) {
             System.out.println("Error when adding a new gnome.");
         }
+        gnome = new Gnome();
     }
 
     public void removeGnomeFromInventory(String name, int amount) {
@@ -89,6 +98,17 @@ public class GWSFacade {
         for (int i = 0; i < tempResultList.size(); i++) {
             resultList.add(tempResultList.get(i));
             System.out.println(tempResultList.get(i).getName());
+        }
+        return resultList;
+    }
+    
+        public ArrayList<Client> getClients() {
+        ArrayList<Client> resultList = new ArrayList<>();
+        Query query = em.createQuery("SELECT c FROM Clieng c", Client.class);
+        List<Client> tempResultList = query.getResultList();
+
+        for (int i = 0; i < tempResultList.size(); i++) {
+            resultList.add(tempResultList.get(i));
         }
         return resultList;
     }
@@ -139,4 +159,12 @@ public class GWSFacade {
         }
         return unbanningSuccessful;
     }
+      
+      public boolean isLoggedIn(){
+          boolean returnValue = false;
+          if(loggedInClient != null){
+              returnValue = true;
+          }
+          return returnValue;
+      }
 }
