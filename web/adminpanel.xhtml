@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
     <title>Gnome WebShop Admin Panel</title>
     <style>
@@ -47,9 +48,69 @@
 	top:1px;
 }</style>
 </h:head>
-<h:body>
+<h:body  style="background-image:url('img/bg.jpg');">
+    <h:panelGroup rendered="#{userManager.loggedIn}" layout="block" style="margin:100px auto;background-color: #FFF;height:auto;width:600px;text-align: center;padding-bottom: 30px;">
+    <h:graphicImage  value="img/gnome.png;" style="margin-bottom:30px;"/>
+    <p> Welcome to the gnome shop Admin Panel #{userManager.username}!</p>
+    
+    
+    <p style="color: #057fd0;font-size:18px;">Edit Inventory</p>
+    <hr/>
+    <h:dataTable value="#{userManager.inventory}" var="item" >
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Gnome Type" />
+            </f:facet>
+            
+            #{item.name}      
+        </h:column>
+        
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Amount" />
+            </f:facet>
+            #{item.amount}
+        </h:column>
+    </h:dataTable>
+    
+    <h:form>
+    <h:selectOneMenu value="#{userManager.gnometypeAdmin}">
+        <f:selectItems value="#{userManager.inventory}" var="gnome" itemValue="#{gnome.name}" itemLabel="#{gnome.name}"/>
+    </h:selectOneMenu>  
+    <h:inputText value="#{userManager.amountAdmin}" style="width:100px;" />
+    <h:commandButton value="Delete Type" action="#{userManager.deleteGnome}" class="myButton" />
+    <h:commandButton value="Add Amount" action="#{userManager.addGnomeAmount}" class="myButton" />
+    <br/>
+    <br/>
+    <br/>
+    <p style="color: #057fd0;font-size:18px;">Add New Gnome Type</p>
+    <hr/>
+    <h:outputText value="Type of Gnome" style="margin-right:15px;"/> 
+    <h:inputText value="#{userManager.gnometypeAdminNew}" style="width:100px;" />
+    <br/>
+    <h:outputText value="Amount of Gnomes" style="margin-right:15px;"/>
+    <h:inputText value="#{userManager.amountAdminNew}" style="width:100px;"/>
+    <br/>
+    <h:commandButton value="New Gnome Type" action="#{userManager.addNewGnome}" class="myButton" />
+    </h:form>
+    <br/>
+    <p style="color: #057fd0;font-size:18px;">Edit Users</p>
+    <hr/>
 
-    <p> Welcome to the admin panel!</p>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h:form>  
+    <h:commandButton value="Logout" action="#{userManager.logout}" class="myButton" style="font-size:10px;" />
+    </h:form>
+    
+   
+    </h:panelGroup>
+    <h:panelGroup rendered="#{!userManager.loggedIn}"  layout="block" style="margin:100px auto;background-color: #FFF;height:auto;width:600px;text-align: center;padding-bottom: 30px; padding-top:30px;">
+        You have to login first. Please login <a href="login.xhtml">here</a>;
+    </h:panelGroup>
     
 </h:body>
 

@@ -34,6 +34,15 @@ public class UserManager implements Serializable{
     private String username;
     private String password;
    
+    
+    private String gnometypeAdmin;
+    private Integer amountAdmin;
+
+    private String gnometypeAdminNew;
+    private Integer amountAdminNew;
+
+ 
+    
     private ArrayList<Gnome> gnomesList;
     
     private String gnometype;
@@ -123,6 +132,29 @@ public class UserManager implements Serializable{
      shoppingCart = new ArrayList<Gnome>();
     }
     
+    
+    public void addNewGnome(){
+        gwsFacade.addNewGnomeToInventory(gnometypeAdminNew, amountAdminNew);
+    }
+    
+    public void deleteGnome(){
+        gwsFacade.removeGnomeFromInventory(gnometypeAdmin, 1);
+    }
+    
+    public void addGnomeAmount(){
+        gwsFacade.addGnomeToInventory(gnometypeAdmin, amountAdmin);
+    }
+    
+    //GETTERS AND SETTERS
+    
+    
+     public String getGnometypeAdminNew() {
+        return gnometypeAdminNew;
+    }
+
+    public Integer getAmountAdminNew() {
+        return amountAdminNew;
+    }
      public void setGnometype(String gnometype) {
         this.gnometype = gnometype;
     }
@@ -130,14 +162,27 @@ public class UserManager implements Serializable{
     public String getGnometype() {
         return gnometype;
     }
-    
+       public void setGnometypeAdminNew(String gnometypeAdminNew) {
+        this.gnometypeAdminNew = gnometypeAdminNew;
+    }
+
+    public void setAmountAdminNew(Integer amountAdminNew) {
+        this.amountAdminNew = amountAdminNew;
+    }
      /**
      * @return the username
      */
     public String getUsername() {
         return username;
     }
+    
+    public void setGnometypeAdmin(String gnometypeAdmin) {
+        this.gnometypeAdmin = gnometypeAdmin;
+    }
 
+    public void setAmountAdmin(Integer amountAdmin) {
+        this.amountAdmin = amountAdmin;
+    }
      /**
      * @return the username
      */
@@ -151,6 +196,15 @@ public class UserManager implements Serializable{
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    
+       public String getGnometypeAdmin() {
+        return gnometypeAdmin;
+    }
+
+    public Integer getAmountAdmin() {
+        return amountAdmin;
     }
     
      /**
