@@ -55,16 +55,16 @@ public class GWSFacade {
 
     public boolean register(String name, String password, boolean isAdmin) {
 
-        boolean result;
-        Client client = new Client(name, password, 0, 0);
-        try {
-            em.persist(client);
-            result = true;
-        } catch (Exception e) {
-            result = false;
-            System.out.println("Error when registering a user.");
+        boolean result = false;
+        if (em.find(Client.class, name) == null) {
+            try {
+                Client client = new Client(name, password, 0, 0);
+                em.persist(client);
+                result = true;
+            } catch (Exception e) {
+                System.out.println("Error when registering a user.");
+            }
         }
-        client = new Client();
         return result;
     }
 
