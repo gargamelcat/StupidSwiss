@@ -48,8 +48,8 @@ public class GWSFacade {
 
         return loginSuccessful;
     }
-    
-    public void logout(){
+
+    public void logout() {
         loggedInClient = null;
     }
 
@@ -68,14 +68,18 @@ public class GWSFacade {
         return result;
     }
 
-    public void addNewGnomeToInventory(String name, int amount) {
-        Gnome gnome = new Gnome(name, amount);
-        try {
-            em.persist(gnome);
-        } catch (Exception e) {
-            System.out.println("Error when adding a new gnome.");
+    public boolean addNewGnomeToInventory(String name, int amount) {
+        boolean returnValue = false;
+        if (em.find(Gnome.class, name) == null) {
+            Gnome gnome = new Gnome(name, amount);
+            try {
+                em.persist(gnome);
+            } catch (Exception e) {
+                System.out.println("Error when adding a new gnome.");
+            }
+            returnValue = true;
         }
-        gnome = new Gnome();
+        return returnValue;
     }
 
     public void removeGnomeFromInventory(String name, int amount) {
@@ -101,8 +105,8 @@ public class GWSFacade {
         }
         return resultList;
     }
-    
-        public ArrayList<Client> getClients() {
+
+    public ArrayList<Client> getClients() {
         ArrayList<Client> resultList = new ArrayList<>();
         Query query = em.createQuery("SELECT c FROM Clieng c", Client.class);
         List<Client> tempResultList = query.getResultList();
@@ -149,8 +153,8 @@ public class GWSFacade {
         }
         return banningSuccessful;
     }
-    
-      public boolean unbannUser(String userName) {
+
+    public boolean unbannUser(String userName) {
         boolean unbanningSuccessful = false;
         Client client = em.find(Client.class, userName);
 
@@ -159,12 +163,12 @@ public class GWSFacade {
         }
         return unbanningSuccessful;
     }
-      
-      public boolean isLoggedIn(){
-          boolean returnValue = false;
-          if(loggedInClient != null){
-              returnValue = true;
-          }
-          return returnValue;
-      }
+
+    public boolean isLoggedIn() {
+        boolean returnValue = false;
+        if (loggedInClient != null) {
+            returnValue = true;
+        }
+        return returnValue;
+    }
 }
