@@ -46,6 +46,33 @@
 .myButton:active {
 	position:relative;
 	top:1px;
+}
+    .table {
+	margin:0px;padding:0px;
+        margin-bottom:25px;
+	width:100%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #000000;
+	
+	-moz-border-radius-bottomleft:12px;
+	-webkit-border-bottom-left-radius:12px;
+	border-bottom-left-radius:12px;
+	
+	-moz-border-radius-bottomright:12px;
+	-webkit-border-bottom-right-radius:12px;
+	border-bottom-right-radius:12px;
+	
+	-moz-border-radius-topright:12px;
+	-webkit-border-top-right-radius:12px;
+	border-top-right-radius:12px;
+	
+	-moz-border-radius-topleft:12px;
+	-webkit-border-top-left-radius:12px;
+	border-top-left-radius:12px;
+}
+.Header{
+    border-bottom: 1px solid #F26C9F;
+    
 }</style>
 </h:head>
 <h:body  style="background-image:url('img/bg.jpg');">
@@ -56,7 +83,7 @@
     
     <p style="color: #057fd0;font-size:18px;">Edit Inventory</p>
     <hr/>
-    <h:dataTable value="#{userManager.inventory}" var="item" >
+    <h:dataTable value="#{userManager.inventory}" var="item" styleClass="table" headerClass="Header">
         <h:column>
             <f:facet name="header">
                 <h:outputText value="Gnome Type" />
