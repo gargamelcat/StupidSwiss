@@ -76,7 +76,9 @@
     <h:selectOneMenu value="#{userManager.gnometype}">
         <f:selectItems value="#{userManager.inventory}" var="gnome" itemValue="#{gnome.name}" itemLabel="#{gnome.name}"/>
     </h:selectOneMenu>  
-    <h:inputText value="#{userManager.amount}" />
+    <h:inputText value="#{userManager.amount}">
+        <f:convertNumber integerOnly="true" type="number" />
+    </h:inputText> 
     <h:commandButton value="Add to Cart" action="#{userManager.addCart}" class="myButton" />
 
     </h:form>
@@ -84,7 +86,8 @@
 
     <br/>
     <br/>
-    <b>Shopping Cart</b>
+    <hr/>
+    <b style="color: #057fd0;font-size:18px;">Shopping Cart</b>
     <h:dataTable value="#{userManager.shoppingCart}" var="item" >
              
         <h:column>
