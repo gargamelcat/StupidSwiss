@@ -10,21 +10,21 @@
 	-moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
 	-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
 	box-shadow: 0px 1px 0px 0px #f0f7fa;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
-	background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
-	background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
-	background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
-	background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
-	background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #F26C9F), color-stop(1, #C7E2F6));
+	background:-moz-linear-gradient(top, #F26C9F 5%, #C7E2F6 100%);
+	background:-webkit-linear-gradient(top, #F26C9F 5%, #C7E2F6 100%);
+	background:-o-linear-gradient(top, #F26C9F 5%, #C7E2F6 100%);
+	background:-ms-linear-gradient(top, #F26C9F 5%, #C7E2F6 100%);
+	background:linear-gradient(to bottom, #F26C9F 5%, #C7E2F6 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
-	background-color:#33bdef;
+	background-color:#F26C9F;
 	-moz-border-radius:19px;
 	-webkit-border-radius:19px;
 	border-radius:19px;
 	border:1px solid #057fd0;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
+	color:#000;
 	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
@@ -33,34 +33,38 @@
 	text-shadow:0px -1px 0px #5b6178;
 }
 .myButton:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #019ad2), color-stop(1, #33bdef));
-	background:-moz-linear-gradient(top, #019ad2 5%, #33bdef 100%);
-	background:-webkit-linear-gradient(top, #019ad2 5%, #33bdef 100%);
-	background:-o-linear-gradient(top, #019ad2 5%, #33bdef 100%);
-	background:-ms-linear-gradient(top, #019ad2 5%, #33bdef 100%);
-	background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #C7E2F6), color-stop(1, #F26C9F));
+	background:-moz-linear-gradient(top, #C7E2F6 5%, #F26C9F 100%);
+	background:-webkit-linear-gradient(top, #C7E2F6 5%, #F26C9F 100%);
+	background:-o-linear-gradient(top, #C7E2F6 5%, #F26C9F 100%);
+	background:-ms-linear-gradient(top, #C7E2F6 5%, #F26C9F 100%);
+	background:linear-gradient(to bottom, #C7E2F6 5%, #F26C9F 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#019ad2', endColorstr='#33bdef',GradientType=0);
-	background-color:#019ad2;
+	background-color:#C7E2F6;
 }
 .myButton:active {
 	position:relative;
 	top:1px;
 }</style>
 </h:head>
-<h:body>
-
-<h:form>
+<h:body style="background-image:url('img/bg.jpg');" >
     
-        <h:outputText value="Username" />
-        <h:inputText id="username" value="#{userManager.username}"/>
-        <h:outputText value="Password" />
-        <h:inputText id="password" value="#{userManager.password}" />
-
- <h:commandButton value="Login" action="#{userManager.login}" class="myButton" />
- <h:commandButton value="Register" action="#{userManager.register}" class="myButton" />
- <h:commandButton value="Admin Login" action="#{userManager.loginAdmin}" class="myButton" />
-</h:form>
-    
+    <h:form style="margin:100px auto;background-color: #FFF;height:400px;width:600px;text-align: center;">
+            <h:graphicImage  value="img/gnome.png;" style="margin-bottom:30px;"/>
+            <h:outputText value="Username" style="margin-right:15px;"/>
+            <h:inputText id="username" value="#{userManager.username}" style="width:140px;"  />
+            <br/>
+            <br/>
+            <h:outputText value="Password" style="margin-right:15px;"/>
+            <h:inputText id="password" value="#{userManager.password}" style="width:140px;" />
+            <br/>
+            <br/>
+            <br/>            
+     <h:commandButton value="Login" action="#{userManager.login}" class="myButton" />
+     <h:commandButton value="Register" action="#{userManager.register}" class="myButton" />
+     <h:commandButton value="Admin Login" action="#{userManager.loginAdmin}" class="myButton" />
+    </h:form>
+   
 </h:body>
 
 </html>
