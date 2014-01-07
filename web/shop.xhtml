@@ -149,6 +149,17 @@ ul{
         </h:column>
     </h:dataTable>
     
+        <br/>
+    
+    <h:form>
+    <h:selectOneMenu value="#{userManager.gnometypeToRemove}">
+        <f:selectItems value="#{userManager.shoppingCart}" var="gnome" itemValue="#{gnome.name}" itemLabel="#{gnome.name}"/>
+    </h:selectOneMenu>  
+    <h:commandButton value="Remove from card" action="#{userManager.removeFromCard}" class="myButton" />
+
+    </h:form>
+    <br/>  
+    
     <h:form>   
     
     <h:commandButton value="Buy!" action="#{userManager.buy}" class="myButton" />

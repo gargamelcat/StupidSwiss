@@ -23,7 +23,6 @@ import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 import org.omg.CORBA.DomainManager;
 
-
 /**
  *
  * @author albert
@@ -44,6 +43,7 @@ public class GWSManager implements Serializable {
     private ArrayList<Client> clientList;
     private ArrayList<Client> bannedClients;
     private String gnometype = null;
+    private String gnometypeToRemove = null;
     private Integer amount = 0;
     private ArrayList<Gnome> shoppingCart;
     private Exception transactionFailure;
@@ -145,6 +145,21 @@ public class GWSManager implements Serializable {
             gnometype = null;
             amount = 0;
         }
+    }
+
+    public void removeFromCard() {
+        if (shoppingCart != null) {
+            if (gwsFacade.doesGnomeExist(gnometypeToRemove)) {
+                for (int i = 0; i < shoppingCart.size(); i++) {
+                    if (shoppingCart.get(i).getName().equals(gnometypeToRemove)) {
+                        shoppingCart.remove(i);
+                    }
+                }
+            }
+            gnometypeToRemove = null;
+
+        }
+
     }
 
     public void buy() {
@@ -306,8 +321,16 @@ public class GWSManager implements Serializable {
     public Integer getAmount() {
         return amount;
     }
-    
-        /**
+
+    public String getGnometypeToRemove() {
+        return gnometypeToRemove;
+    }
+
+    public void setGnometypeToRemove(String gnometypeToRemove) {
+        this.gnometypeToRemove = gnometypeToRemove;
+    }
+
+    /**
      * @return <code>true</code> if the latest transaction succeeded, otherwise
      * <code>false</code>.
      */
@@ -335,6 +358,3 @@ public class GWSManager implements Serializable {
         return "";
     }
 }
-
-
-
