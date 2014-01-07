@@ -15,7 +15,7 @@ import javax.persistence.Query;
 
 /**
  * A controller. All calls to the model that are executed because of an action
- * taken by the ConvManager pass through here.
+ * taken by the GWSManager pass through here.
  */
 //git test 
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
