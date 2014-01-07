@@ -1,6 +1,9 @@
 INSERT INTO ROOT.GNOME ("NAME", AMOUNT) 
     VALUES
-        ('bli', 10),
-        ('bla', 10),
-        ('blub', 10),
-        ('halo', 10)
+        ('Doc', 10),
+        ('Grumpy', 10),
+        ('Happy', 10),
+        ('Sleepy', 10),
+        ('Bashful', 10),
+        ('Sneezy', 10),
+        ('Dopey', 10)

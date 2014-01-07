@@ -52,7 +52,10 @@ public class GWSManager implements Serializable {
     private GWSFacade gwsFacade;
 
     public String login() {
-
+        if(gwsFacade.isBanned(username)) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You have been banned by an admin!"));
+            return null;
+        }
         if (!gwsFacade.login(username, password, false)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login, try again"));
             username = null;
