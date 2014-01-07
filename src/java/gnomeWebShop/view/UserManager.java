@@ -33,26 +33,17 @@ public class UserManager implements Serializable {
 
     private String username;
     private String password;
-
     private String gnometypeAdmin;
     private Integer amountAdmin;
-
     private String gnometypeAdminNew;
     private Integer amountAdminNew;
-
     private String banUsername;
     private String unbanUsername;
-
     private ArrayList<Gnome> gnomesList;
     private ArrayList<Client> clientList;
     private ArrayList<Client> bannedClients;
-
-
-
     private String gnometype = null;
-
     private Integer amount = 0;
-
     private ArrayList<Gnome> shoppingCart;
 
     @EJB
@@ -63,11 +54,11 @@ public class UserManager implements Serializable {
         if (!gwsFacade.login(username, password, false)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login, try again"));
             username = null;
-            password = null;            
+            password = null;
             return (username = password = null);
         } else {
             username = null;
-            password = null;            
+            password = null;
             return "shop.xhtml?faces-redirect=true";
         }
     }
@@ -102,17 +93,7 @@ public class UserManager implements Serializable {
     }
 
     public boolean isAdminLoggedIn() {
-            return gwsFacade.isAdminLoggedIn();
-    }
-
-    public ArrayList<Client> getClients() {
-        clientList = gwsFacade.getUnbannedClients();
-        return clientList;
-    }
-    
-    public ArrayList<Client> getBannedClients() {
-        bannedClients = gwsFacade.getBannedClients();
-        return bannedClients;
+        return gwsFacade.isAdminLoggedIn();
     }
 
     /**
@@ -134,8 +115,8 @@ public class UserManager implements Serializable {
         };
         banUsername = null;
     }
-    
-        public void unbanUsername() {
+
+    public void unbanUsername() {
         if (gwsFacade.unbannUser(unbanUsername) != true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("User you tried to bann does not exist. No one was banned."));
         };
@@ -146,7 +127,7 @@ public class UserManager implements Serializable {
         if (shoppingCart == null) {
             shoppingCart = new ArrayList<Gnome>();
         }
-        if(gwsFacade.doesGnomeExist(gnometype)){
+        if (gwsFacade.doesGnomeExist(gnometype)) {
             Gnome gnometemp;
             gnometemp = new Gnome(gnometype, amount);
             boolean trobat = false;
@@ -167,15 +148,15 @@ public class UserManager implements Serializable {
     public void buy() {
         boolean boughtSuccessful = true;
         for (int i = 0; i < shoppingCart.size(); i++) {
-            if (gwsFacade.buyGnome(shoppingCart.get(i).getName(), shoppingCart.get(i).getAmount())== false) {
-                boughtSuccessful = false; 
+            if (gwsFacade.buyGnome(shoppingCart.get(i).getName(), shoppingCart.get(i).getAmount()) == false) {
+                boughtSuccessful = false;
             }
         }
-        
-        if(boughtSuccessful){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You successfully bought the gnomes!"));   
-        }else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Some error occurred during the buying process")); 
+
+        if (boughtSuccessful) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You successfully bought the gnomes!"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Some error occurred during the buying process"));
         }
         shoppingCart = new ArrayList<Gnome>();
     }
@@ -204,6 +185,16 @@ public class UserManager implements Serializable {
     }
 
     //GETTERS AND SETTERS
+    public ArrayList<Client> getClients() {
+        clientList = gwsFacade.getUnbannedClients();
+        return clientList;
+    }
+
+    public ArrayList<Client> getBannedClients() {
+        bannedClients = gwsFacade.getBannedClients();
+        return bannedClients;
+    }
+
     public void setShoppingCart(ArrayList<Gnome> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
@@ -235,7 +226,7 @@ public class UserManager implements Serializable {
     public void setUnbanUsername(String unbanUsername) {
         this.unbanUsername = unbanUsername;
     }
-    
+
     public String getGnometypeAdminNew() {
         return gnometypeAdminNew;
     }
