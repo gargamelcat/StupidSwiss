@@ -41,9 +41,13 @@ public class UserManager implements Serializable {
     private Integer amountAdminNew;
 
     private String banUsername;
+    private String unbanUsername;
 
     private ArrayList<Gnome> gnomesList;
     private ArrayList<Client> clientList;
+    private ArrayList<Client> bannedClients;
+
+
 
     private String gnometype = null;
 
@@ -105,6 +109,11 @@ public class UserManager implements Serializable {
         clientList = gwsFacade.getUnbannedClients();
         return clientList;
     }
+    
+    public ArrayList<Client> getBannedClients() {
+        bannedClients = gwsFacade.getBannedClients();
+        return bannedClients;
+    }
 
     /**
      * Register a new user.
@@ -124,6 +133,13 @@ public class UserManager implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("User you tried to bann does not exist. No one was banned."));
         };
         banUsername = null;
+    }
+    
+        public void unbanUsername() {
+        if (gwsFacade.unbannUser(unbanUsername) != true) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("User you tried to bann does not exist. No one was banned."));
+        };
+        unbanUsername = null;
     }
 
     public void addCart() {
@@ -212,6 +228,14 @@ public class UserManager implements Serializable {
         return banUsername;
     }
 
+    public String getUnbanUsername() {
+        return unbanUsername;
+    }
+
+    public void setUnbanUsername(String unbanUsername) {
+        this.unbanUsername = unbanUsername;
+    }
+    
     public String getGnometypeAdminNew() {
         return gnometypeAdminNew;
     }
